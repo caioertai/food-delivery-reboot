@@ -1,4 +1,4 @@
-# This is where we're declaring all out dependencies.
+# This is where we're declaring all our dependencies.
 require_relative 'app/views/view'
 require_relative 'app/models/meal'
 require_relative 'app/repositories/meal_repository'
