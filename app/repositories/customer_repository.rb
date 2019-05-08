@@ -1,13 +1,13 @@
 require 'csv'
 
-class MealRepository < BaseRepository
+class CustomerRepository < BaseRepository
   private
 
   def save_csv
     CSV.open(@csv_file_path, 'wb') do |csv_file|
-      csv_file << Meal::CSV_HEADERS
-      @elements.each do |meal|
-        csv_file << meal.to_a
+      csv_file << Customer::CSV_HEADERS
+      @elements.each do |customer|
+        csv_file << customer.to_a
       end
     end
   end
@@ -16,8 +16,7 @@ class MealRepository < BaseRepository
     csv_options = { headers: :first_row, header_converters: :symbol }
     CSV.foreach(@csv_file_path, csv_options) do |row|
       row[:id] = row[:id].to_i
-      row[:price] = row[:price].to_i
-      @elements << Meal.new(row)
+      @elements << Customer.new(row)
     end
     @next_id = @elements.empty? ? 1 : @elements.last.id + 1
   end

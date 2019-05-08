@@ -1,13 +1,17 @@
 require 'csv'
 
-class MealRepository < BaseRepository
+class EmployeeRepository < BaseRepository
+  def find_by_username(username)
+    @elements.find { |element| element.username == username }
+  end
+
   private
 
   def save_csv
     CSV.open(@csv_file_path, 'wb') do |csv_file|
-      csv_file << Meal::CSV_HEADERS
-      @elements.each do |meal|
-        csv_file << meal.to_a
+      csv_file << Employee::CSV_HEADERS
+      @elements.each do |employee|
+        csv_file << employee.to_a
       end
     end
   end
@@ -16,8 +20,7 @@ class MealRepository < BaseRepository
     csv_options = { headers: :first_row, header_converters: :symbol }
     CSV.foreach(@csv_file_path, csv_options) do |row|
       row[:id] = row[:id].to_i
-      row[:price] = row[:price].to_i
-      @elements << Meal.new(row)
+      @elements << Employee.new(row)
     end
     @next_id = @elements.empty? ? 1 : @elements.last.id + 1
   end
