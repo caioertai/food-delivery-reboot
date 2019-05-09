@@ -12,6 +12,10 @@ class BaseRepository
     @elements
   end
 
+  def find(id)
+    @elements.find { |element| element.id == id }
+  end
+
   def add(element)
     element.id = @next_id
     @next_id += 1

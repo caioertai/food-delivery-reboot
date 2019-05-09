@@ -1,3 +1,4 @@
 id,username,password,role
 1,john,secret,manager
 2,ringo,secret,delivery_guy
+3,GEORGE,secret,delivery_guy
